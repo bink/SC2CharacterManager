@@ -1,2 +1,7 @@
+import Data
+
 class Manager:
-	pass
+
+	def __init__(self):
+		self.characters = [0,1,2,3,4]
+		self.Data = Data
