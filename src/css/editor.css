@@ -1,0 +1,25 @@
+.tab-content {
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+.section h3 {
+	margin-top: 0;
+}
+
+.form-control.incrementable {
+	width: calc(100% - 16px);
+	float: left;
+}
+
+.btn-container {
+	float: right;
+	width: 16px;
+}
+
+.btn.btn-inc {
+	font-size: 7px;
+	padding: 4px;
+	display: block;
+}

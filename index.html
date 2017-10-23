@@ -1,0 +1,170 @@
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="src/css/editor.css" rel="stylesheet" />
+	</head>
+	<body>
+
+		<!-- Main container -->
+		<div class="container">
+			<div class="main-tabbed-content">
+				<!-- Tabs -->
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#general" data-toggle="tab">General</a></li>
+					<li class=""><a href="#skills" data-toggle="tab">Skills</a></li>
+				</ul>
+				<!-- Main contents -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="general">
+						<!-- General Character information -->
+						<div class="form-inline section well">
+							<h3>General Information</h3>
+							<!-- Name field -->
+							<div class="form-group">
+								<label for="c_name">Name</label>
+								<input type="text" class="c_save form-control" id="c_name" placeholder="Jim Raynor">
+							</div>
+							<!-- Race field -->
+							<div class="form-group">
+								<label for="c_race">Race</label>
+								<select class="c_save form-control" id="c_race">
+									<!-- Filled by editor.js -->
+								</select>
+							</div>
+						</div>
+
+						<div class="row">
+							<!-- Ability scores -->
+							<div class="col-sm-3">
+							<div class="section well" id="section_abilities">
+								<h3>Attributes</h3>
+								<div class="form-horizontal">
+									<!-- Strength field -->
+									<div class="form-group">
+										<label for="c_atr_str" class="col-xs-6">Strength</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control incrementable" id="c_atr_str" value="">
+										</div>
+									</div>
+									<!-- Instinct field -->
+									<div class="form-group">
+										<label for="c_atr_ins" class="col-xs-6">Instinct</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control incrementable" id="c_atr_ins" value="">
+										</div>
+									</div>
+									<!-- Agility field -->
+									<div class="form-group">
+										<label for="c_atr_agi" class="col-xs-6">Agility</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control incrementable" id="c_atr_agi" value="">
+										</div>
+									</div>
+									<!-- Fortitude field -->
+									<div class="form-group">
+										<label for="c_atr_for" class="col-xs-6">Fortitude</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control incrementable" id="c_atr_for" value="">
+										</div>
+									</div>
+									<!-- Intelligence field -->
+									<div class="form-group">
+										<label for="c_atr_int" class="col-xs-6">Intelligence</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control incrementable" id="c_atr_int" value="">
+										</div>
+									</div>
+									<!-- Willpower field -->
+									<div class="form-group">
+										<label for="c_atr_wil" class="col-xs-6">Willpower</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control incrementable" id="c_atr_wil" value="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<!-- Statistics -->
+							<div class="section well" id="section_statistics">
+								<h3>Statistics</h3>
+								<div class="form-horizontal row">
+									<div class="col-sm-6">
+									<!-- Hit points -->
+									<div class="form-group">
+										<label for="c_stat_hp" class="col-xs-6">Hit Points</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_hp" value="">
+										</div>
+									</div>
+									<!-- Defense -->
+									<div class="form-group">
+										<label for="c_stat_def" class="col-xs-6">Defense</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_def" value="">
+										</div>
+									</div>
+									<!-- Initiative -->
+									<div class="form-group">
+										<label for="c_stat_ini" class="col-xs-6">Initiative</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_ini" value="">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<!-- Toughness -->
+									<div class="form-group">
+										<label for="c_stat_tgh" class="col-xs-6">Toughness</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_tgh" value="">
+										</div>
+									</div>
+									<!-- Resolve -->
+									<div class="form-group">
+										<label for="c_stat_res" class="col-xs-6">Resolve</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_res" value="">
+										</div>
+									</div>
+									<!-- Morale Bonus -->
+									<div class="form-group">
+										<label for="c_stat_mor" class="col-xs-6">Morale Bonus</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_mor" value="">
+										</div>
+									</div>
+									<!-- Speed -->
+									<div class="form-group">
+										<label for="c_stat_spe" class="col-xs-6">Speed</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_spe" value="">
+										</div>
+									</div>
+									<!-- Shift speed -->
+									<div class="form-group">
+										<label for="c_stat_shi" class="col-xs-6">Shift speed</label>
+										<div class="col-xs-6">
+											<input type="text"" class="c_save form-control" id="c_stat_shi" value="">
+										</div>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="tab-pane" id="skills"><h2>2nd tab</h2></div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+		<script src="src/js/static.js"></script>
+		<script src="src/js/database.js"></script>
+		<script src="src/js/character.js"></script>
+		<script src="src/js/editor.js"></script>
+	</body>
+</html>
