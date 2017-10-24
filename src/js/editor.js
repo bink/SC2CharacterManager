@@ -7,21 +7,17 @@ function fillStaticValues() {
 	}
 }
 
-function setupBonusFields() {
-	$(".c_save.incrementable").each(function(){
-		$("<input>").attr("type","hidden")
-			.attr("id",$(this).attr("id")+"_base")
-			.attr("value",0)
-			.insertAfter(this);
+function setupFields() {
+	// Add +/- Buttons to .incrementable fields
+	$(".incrementable").each(function(){
+
+		$(this).addClass("c_calc");
+
 		$("<input>").attr("type","hidden")
 			.attr("id",$(this).attr("id")+"_bonus")
 			.attr("value",0)
+			.addClass("c_save")
 			.insertAfter(this);
-	});
-
-	$(".incrementable").each(function() {
-
-		$(this).removeClass("c_save").addClass("c_calc");
 
 		var incbtn = $("<button data-target=\"#"+this.id+"\"><span class=\"glyphicon glyphicon-plus\"></span></button>").addClass("btn btn-default btn-inc");
 		
@@ -34,7 +30,6 @@ function setupBonusFields() {
 		decbtn.click(function() {
 			addBonus($(this).attr("data-target"),-1);
 		});
-
 
 		var btncont = $("<div class=\"btn-container\">").insertAfter(this);
 		incbtn.appendTo(btncont);
@@ -49,17 +44,39 @@ function addBonus(field,amount) {
 	var newvalue = currentvalue + amount;
 
 	$(targetField).val(newvalue);
-	updateCharacter();
+	calc();
 }
 
 function init() {
 	fillStaticValues();
-	setupBonusFields();
+	setupFields();
 	// Load the initial character
-	db_load_character("test");
+	//db_load_character("test");
 }
 
 $(init());
+
+/** Calculations **/
+
+/**
+ * This function is always called when updating any field in the table.
+ */
+function calc() {
+	toCharacter(); //Write all savable values to the character object
+	character.calc();
+	fromCharacter();
+}
+
+/** Menus **/
+$(".menu-save").click(function() {
+	db_store_character("test");
+});
+
+$(".menu-load").click(function() {
+	db_load_character("test");
+	character.calc();
+	fromCharacter();
+});
 
 /** Updating the character **/
 
@@ -67,13 +84,10 @@ function toCharacter() {
 	// Write all values marked as "c_save" to the character object
 	$(".c_save").each(function() {
 		var field_id = $(this).attr("id").substring(2);
-		if ($(this).hasClass("incrementable")) {
-			var fieldVal = parseInt($("#c_"+field_id+"_bonus").attr("value"));
-			character[field_id+"_bonus"] = fieldVal;
-		} else {
-			character[field_id] = $(this).val();
-		}
+		character[field_id] = $(this).val();
 	});
+
+	console.log(character);
 }
 
 function fromCharacter() {
@@ -81,17 +95,21 @@ function fromCharacter() {
 	for(var i in character) {
 		$(".c_save#c_"+i+"_bonus").val(character[i+"_bonus"]);
 		$(".c_calc#c_"+i).val(character[i]);
+		$(".c_save#c_"+i).val(character[i]);
 	}
 }
-
+/*
 function updateCharacter() {
 	toCharacter();
 	character.calc();
 	fromCharacter();
 	db_store_character("test");
 }
+*/
 
-$(".c_save").on("keyup change",null,null,updateCharacter);
+$(".c_save").on("keyup change",null,null,calc);
 
-character.calc();
-fromCharacter();
+calc();
+
+//character.calc();
+//fromCharacter();
