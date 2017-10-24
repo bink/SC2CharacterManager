@@ -35,6 +35,13 @@ function fillStaticValues() {
 	}
 }
 
+function loadCharacters() {
+	var db = getDb();
+	for (var i in db) {
+		$("<option>").attr("value",i).html(db[i]["name"]).appendTo($("#load_character_select"));
+	}
+}
+
 function setupFields() {
 	// Add +/- Buttons to .incrementable fields
 	$(".incrementable").each(function(){
@@ -97,14 +104,20 @@ function calc() {
 
 /** Menus **/
 $(".menu-save").click(function() {
-	db_store_character("test");
+	if (character["name"] == "") {
+		alert("You have to enter a character name before saving.")
+	} else {
+		db_store_character(character["name"]);
+	}
 });
 
-$(".menu-load").click(function() {
-	db_load_character("test");
+$("#load_character_button").click(function() {
+	db_load_character($("#load_character_select").val());
 	character.calc();
 	fromCharacter();
+	$("#load_character_modal").modal("hide");
 });
+
 
 /** Updating the character **/
 
@@ -137,6 +150,8 @@ function updateCharacter() {
 	db_store_character("test");
 }
 */
+
+loadCharacters();
 
 $(".c_save").on("keyup change",null,null,calc);
 

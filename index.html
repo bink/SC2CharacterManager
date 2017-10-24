@@ -13,7 +13,7 @@
 			<a class="btn btn-default menu-new" href="#">
 				<span class="glyphicon glyphicon-file"></span> New
 			</a>
-			<a class="btn btn-default menu-load" href="#">
+			<a class="btn btn-default menu-load" data-toggle="modal" href="#" data-target="#load_character_modal">
 				<span class="glyphicon glyphicon-floppy-open"></span> Load
 			</a>
 			<a class="btn btn-default menu-save" href="#">
@@ -21,6 +21,34 @@
 			</a>
 		</div>
 	
+		<div class="modal fade" id="load_character_modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+						<h4 class="modal-title">Load Character</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-horizontal">
+							<div class="form-group row">
+								<label for="load_character_select" class="col-xs-4">Character</label>
+								<div class="col-xs-8">
+									<select id="load_character_select" class="form-control">
+										
+									</select>
+								</div>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn btn-default" id="load_character_button">Load</button>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
 		<div class="main-tabbed-content">
 			<!-- Tabs -->
 			<ul class="nav nav-tabs">
