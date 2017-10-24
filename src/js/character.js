@@ -18,29 +18,42 @@ character.calc = function() {
 	}
 
 	atr_races_bonus = races[this.race].basestats;
-	this.atr_str = atr_races_bonus.str + parseInt(this.atr_str_bonus);
-	this.atr_ins = atr_races_bonus.ins + parseInt(this.atr_ins_bonus);
-	this.atr_agi = atr_races_bonus.agi + parseInt(this.atr_agi_bonus);
-	this.atr_for = atr_races_bonus.for + parseInt(this.atr_for_bonus);
-	this.atr_int = atr_races_bonus.int + parseInt(this.atr_int_bonus);
-	this.atr_wil = atr_races_bonus.wil + parseInt(this.atr_wil_bonus);
+	atr_backg_bonus = backgrounds[this.background].basestats;
+	this.atr_str = atr_races_bonus.str + atr_backg_bonus.str + parseInt(this.atr_str_bonus);
+	this.atr_ins = atr_races_bonus.ins + atr_backg_bonus.ins + parseInt(this.atr_ins_bonus);
+	this.atr_agi = atr_races_bonus.agi + atr_backg_bonus.agi + parseInt(this.atr_agi_bonus);
+	this.atr_for = atr_races_bonus.for + atr_backg_bonus.for + parseInt(this.atr_for_bonus);
+	this.atr_int = atr_races_bonus.int + atr_backg_bonus.int + parseInt(this.atr_int_bonus);
+	this.atr_wil = atr_races_bonus.wil + atr_backg_bonus.wil + parseInt(this.atr_wil_bonus);
 
-	this.stat_hp = 40 + 3 * this.atr_for;
-	this.stat_def = 10 + 1 * this.atr_agi;
+	this.points_spent = parseInt(this.atr_str_bonus)*3 + parseInt(this.atr_ins_bonus)*3 + parseInt(this.atr_agi_bonus)*3 + parseInt(this.atr_for_bonus)*3 + parseInt(this.atr_int_bonus)*3 + parseInt(this.atr_wil_bonus)*3 + races[this.race].cpcost + backgrounds[this.background].cpcost;
+
+	this.points_total = 25;
+
+	for(var i in skills) {
+		this["ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_ranks"] = this["ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_ranks_bonus"];
+		if (skills[i]["atr"] !== "") {
+			this["ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_total"] = parseInt(this["ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_ranks_bonus"]) + this["atr_"+skills[i]["atr"]];
+		} else {
+			this["ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_total"] = parseInt(this["ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_ranks_bonus"]);
+		}
+	}
+
+	this.stat_hp = 40 + 3 * this.atr_for + (5+this.atr_for) * this.ski_durability_ranks;
+	this.stat_def = 10 + parseInt(this.ski_defensivetraining_ranks) + this.atr_agi;
 	this.stat_spe = 4 + Math.floor(0.5 * this.atr_agi);
 	this.stat_ini = this.atr_ins;
-	this.stat_tgh = 10 + this.atr_str + 0;
-	this.stat_res = 10 + this.atr_wil;
-	this.stat_mor = Math.floor(0.5 * this.atr_wil);
+	this.stat_tgh = 10 + parseInt(this.ski_defensivetraining_ranks) + this.atr_str + 0;
+	this.stat_res = 10 + parseInt(this.ski_mentaltraining_ranks) + this.atr_wil;
+	this.stat_mor = Math.floor(0.5 * this.ski_mentaltraining_ranks) + Math.floor(0.5 * this.atr_wil);
 	this.stat_shi = 1;
 
 	this.res_ht = 5 + Math.floor(0.5 * this.atr_for);
-	this.res_dt = 16 + this.atr_for + 0;
+	this.res_dt = 16 + parseInt(this.ski_durability_ranks) + this.atr_for + 0;
 
 	this.res_dr = Math.floor(0.5 * this.atr_for)
-	this.res_pr = 3 * this.atr_wil;
+	this.res_pr = 3 * this.atr_wil + Math.floor(0.5 * this.ski_mentaltraining_ranks);
 
-	this.points_spent = parseInt(this.atr_str_bonus) + parseInt(this.atr_ins_bonus) + parseInt(this.atr_agi_bonus) + parseInt(this.atr_for_bonus) + parseInt(this.atr_int_bonus) + parseInt(this.atr_wil_bonus);
 	console.log(this.points_spent);
 	console.groupEnd();
 };

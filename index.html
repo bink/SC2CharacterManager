@@ -20,7 +20,7 @@
 				<span class="glyphicon glyphicon-floppy-disk"></span> Save
 			</a>
 		</div>
-
+	
 		<div class="main-tabbed-content">
 			<!-- Tabs -->
 			<ul class="nav nav-tabs">
@@ -32,6 +32,10 @@
 				<div class="tab-pane active" id="general">
 					<!-- General Character information -->
 					<div class="form-inline section well">
+
+						<div class="pull-right">
+							Characteristic Points spent: <span id="cp_spent"></span>/<span id="cp_total"></span>
+						</div>
 						<h3>General Information</h3>
 						<!-- Name field -->
 						<div class="form-group">
@@ -42,6 +46,13 @@
 						<div class="form-group">
 							<label for="c_race">Race</label>
 							<select class="c_save form-control" id="c_race">
+								<!-- Filled by editor.js -->
+							</select>
+						</div>
+						<!-- Backgrounds field -->
+						<div class="form-group">
+							<label for="c_background">Background</label>
+							<select class="c_save form-control" id="c_background">
 								<!-- Filled by editor.js -->
 							</select>
 						</div>
@@ -203,7 +214,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane" id="skills"><h2>2nd tab</h2></div>
+				<div class="tab-pane" id="skills">
+					<div class="section well">
+					<h3>Skills</h3>
+					<table id="skills_table" class="table table-striped table-bordered">
+						<thead>
+							<tr><th>Skill</th><th>Ranks</th><th>Total Bonus</th></tr>
+						</thead>
+						<tbody>
+							<!-- Filled by editor.js -->
+						</tbody>
+					</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

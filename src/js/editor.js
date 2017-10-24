@@ -5,6 +5,34 @@ function fillStaticValues() {
 		$("<option>").attr("value",i).html(races[i]["name"])
 			.appendTo("#c_race");
 	}
+	for(var i in backgrounds) {
+		$("<option>").attr("value",i).html(backgrounds[i]["name"])
+				.appendTo("#c_background");
+	}
+	for(var i in skills) {
+		var row = $("<tr>");
+
+		$("<td>").html(skills[i]["name"]).appendTo(row);
+		
+
+		var ranksTd = $("<td>").appendTo(row);
+
+		$("<input>").attr("type","text")
+			.attr("id","c_ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_ranks")
+			.addClass("form-control incrementable")
+			.attr("value",0)
+			.appendTo(ranksTd);
+
+		var bonusTd = $("<td>").appendTo(row);
+
+		$("<input>").attr("type","text")
+			.attr("id","c_ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_total")
+			.addClass("form-control c_calc")
+			.attr("value",0)
+			.appendTo(bonusTd);
+
+		row.appendTo($("#skills_table"));
+	}
 }
 
 function setupFields() {
@@ -97,6 +125,9 @@ function fromCharacter() {
 		$(".c_calc#c_"+i).val(character[i]);
 		$(".c_save#c_"+i).val(character[i]);
 	}
+
+	$("#cp_spent").html(character.points_spent);
+	$("#cp_total").html(character.points_total);
 }
 /*
 function updateCharacter() {
