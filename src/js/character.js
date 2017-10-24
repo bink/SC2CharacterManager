@@ -18,7 +18,7 @@ character.calc = function() {
 	}
 
 	atr_races_bonus = races[this.race].basestats;
-	atr_backg_bonus = backgrounds[this.background].basestats;
+	atr_backg_bonus = backgrounds[this.background]["variations"][this.background_variation.substr(2)].basestats;
 	this.atr_str = atr_races_bonus.str + atr_backg_bonus.str + parseInt(this.atr_str_bonus);
 	this.atr_ins = atr_races_bonus.ins + atr_backg_bonus.ins + parseInt(this.atr_ins_bonus);
 	this.atr_agi = atr_races_bonus.agi + atr_backg_bonus.agi + parseInt(this.atr_agi_bonus);

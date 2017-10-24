@@ -8,7 +8,22 @@ function fillStaticValues() {
 	for(var i in backgrounds) {
 		$("<option>").attr("value",i).html(backgrounds[i]["name"])
 				.appendTo("#c_background");
+		for(var j in backgrounds[i]["variations"]) {
+			$("<option>").attr("value",i+"-"+j).html(backgrounds[i]["variations"][j]["name"]).attr("data-background",i)
+				.appendTo("#c_background_variation");
+		}
 	}
+	var filterBackgrounds = function() {
+		var bg = $("#c_background").val();
+		var options = $("#c_background_variation > option").show().removeAttr("disabled").prop("selected",false);
+		options.not("[data-background=\""+bg+"\"]").hide().attr("disabled","disabled");
+		var en = $("#c_background_variation > option").not("[disabled]");
+		en.first().prop("selected",true);
+		//$("#c_background_variation").val(2);//$("#c_background_variation > option").not(".hidden").first().val());
+		//console.log($("#c_background_variation > option").not(".hidden"));
+	}
+	filterBackgrounds();
+	$("#c_background").change(filterBackgrounds);
 	for(var i in skills) {
 		var row = $("<tr>");
 
