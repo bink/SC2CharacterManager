@@ -57,3 +57,13 @@ character.calc = function() {
 	console.log(this.points_spent);
 	console.groupEnd();
 };
+
+character.addSpec = function(specid) {
+	if(!this.specs_taken) {
+		this.specs_taken = [];
+	}
+
+	if(!(specid in this.specs_taken)) {
+		this.specs_taken.push(specid);
+	}
+}

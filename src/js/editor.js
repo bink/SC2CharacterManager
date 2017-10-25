@@ -96,7 +96,8 @@ function fillStaticValues() {
 		var spec = specializations[i];
 
 		var option = $("<option>").attr("id",i)
-			.html(spec["name"]);
+			.html(spec["name"])
+			.attr("value",i);
 
 		option.appendTo($("#spec_add_select"));
 	}
@@ -158,6 +159,17 @@ function setupFields() {
 		var btncont = $("<div class=\"btn-container\">").insertAfter(this);
 		incbtn.appendTo(btncont);
 		decbtn.appendTo(btncont);
+	});
+
+	// Add a click handler to the add specialization button
+	$("#spec_add_button").click(function() {
+		// Get the selected specialization
+		var spec = $("#spec_add_select").val();
+		// Add it to the character
+		character.addSpec(spec);
+
+		// debug this shit
+		console.log(character);
 	});
 }
 
