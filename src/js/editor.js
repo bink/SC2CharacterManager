@@ -58,7 +58,7 @@ function fillStaticValues() {
 	// Call filterBackgrounds whenever the background field is changed
 	$("#c_background").change(filterBackgrounds);
 
-	// Now we set up the skill table. This could be done in HTMl but I'm way
+	// Now we set up the skill table. This could be done in HTML but I'm way
 	// too lazy to type all that out, so we generate the table dynamically.
 	for(var i in skills) {
 		var row = $("<tr>");
