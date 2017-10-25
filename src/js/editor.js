@@ -61,17 +61,19 @@ function fillStaticValues() {
 	// Now we set up the skill table. This could be done in HTML but I'm way
 	// too lazy to type all that out, so we generate the table dynamically.
 	for(var i in skills) {
+		var skill = skills[i];
+
 		var row = $("<tr>");
 
 		// First column is just the skill name
-		$("<td>").html(skills[i]["name"]).appendTo(row);
+		$("<td>").html(skill["name"]).appendTo(row);
 		
 		// Second column is an input field with +/- buttons for the ranks in
 		// that skill.
 		var ranksTd = $("<td>").appendTo(row);
 
 		$("<input>").attr("type","text")
-			.attr("id","c_ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_ranks")
+			.attr("id","c_ski_"+getSkillFieldId(skill["name"])+"_ranks")
 			.addClass("form-control incrementable")
 			.attr("value",0)
 			.appendTo(ranksTd);
@@ -81,13 +83,18 @@ function fillStaticValues() {
 		var bonusTd = $("<td>").appendTo(row);
 
 		$("<input>").attr("type","text")
-			.attr("id","c_ski_"+skills[i]["name"].toLowerCase().replace(/\s/g,'')+"_total")
+			.attr("id","c_ski_"+getSkillFieldId(skill["name"])+"_total")
 			.addClass("form-control c_calc")
 			.attr("value",0)
 			.appendTo(bonusTd);
 
 		row.appendTo($("#skills_table"));
 	}
+}
+
+// Utility function to make the skill name a valid ID.
+function getSkillFieldId(skillname) {
+	return skillname.toLowerCase().replace(/\s/g,'');
 }
 
 // Grabs all the characters from the database and fills the character select
