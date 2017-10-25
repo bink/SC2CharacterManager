@@ -90,6 +90,16 @@ function fillStaticValues() {
 
 		row.appendTo($("#skills_table"));
 	}
+
+	// Now we add the specializations to the add specialization menu
+	for(var i in specializations) {
+		var spec = specializations[i];
+
+		var option = $("<option>").attr("id",i)
+			.html(spec["name"]);
+
+		option.appendTo($("#spec_add_select"));
+	}
 }
 
 // Utility function to make the skill name a valid ID.
