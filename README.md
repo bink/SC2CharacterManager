@@ -6,6 +6,6 @@ The rules for the game can be found at http://www.leovauntgamedesign.com/
 You can test the tool itself at https://bink.github.io/SC2CharacterManager/index.html
 
 ## Current state of development
-The editor currently supports creating, saving and loading characters, choosing their race (currently only Terran) and background and adjusting their attributes and skills. It automatically adjusts statistics like hit points accordingly.
+The editor currently supports creating, saving and loading characters, choosing their race (currently only Terran) and background and adjusting their attributes and skills, specializations and talents. It automatically adjusts statistics like hit points accordingly.
 
-Specializations and talents are planned as well as more races and a tab to roll dice and automatically add bonuses.
+More races, psionics and a tab to roll dice and automatically add bonuses are planned.
