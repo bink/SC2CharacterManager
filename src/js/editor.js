@@ -262,6 +262,8 @@ function fromCharacter() {
 		var specrow = $("<tr>").addClass("specialization");
 		$("<td>").html(spec["name"])
 			.appendTo(specrow);
+		$("<td>").html(spec["description"])
+			.appendTo(specrow);
 
 		specrow.appendTo($("#spec_table"));
 	}
