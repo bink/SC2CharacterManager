@@ -101,6 +101,17 @@ function fillStaticValues() {
 
 		option.appendTo($("#spec_add_select"));
 	}
+
+	// Now we add the talents to the add talent menu
+	for(var i in talents) {
+		var talent = talents[i];
+
+		var option = $("<option>").attr("id",i)
+			.html(talent["name"])
+			.attr("value",i);
+
+		option.appendTo($("#talent_add_select"));
+	}
 }
 
 // Utility function to make the skill name a valid ID.
@@ -167,6 +178,16 @@ function setupFields() {
 		var spec = $("#spec_add_select").val();
 		// Add it to the character
 		character.addSpec(spec);
+
+		calc();
+	});
+
+	// Add a click handler to the add specialization button
+	$("#talent_add_button").click(function() {
+		// Get the selected specialization
+		var talent = $("#talent_add_select").val();
+		// Add it to the character
+		character.addTalent(talent);
 
 		calc();
 	});
@@ -252,7 +273,7 @@ function fromCharacter() {
 	$("#cp_spent").html(character.points_spent);
 	$("#cp_total").html(character.points_total);
 	
-	// Clear the table completely
+	// Clear the spec table completely
 	$("tr.specialization").remove();
 
 	// Add specs to spec table
@@ -280,4 +301,59 @@ function fromCharacter() {
 
 		specrow.appendTo($("#spec_table"));
 	}
+
+	// Clear the talent table completely
+	$("tr.talent").remove();
+
+	// Add talents to talent table
+	for(var i in character.talents_taken) {
+		var talent = talents[character.talents_taken[i]];
+		var talentrow = $("<tr>").addClass("talent");
+		// Add a name column
+		$("<td>").html(talent["name"])
+			.appendTo(talentrow);
+		// ...a requirements column...
+		$("<td>").html(getTalentRequirementsString(talent["requirements"])) // This is currenlty empty
+			.appendTo(talentrow);
+		// ...and a description column.
+		$("<td>").html(talent["bonus"])
+			.appendTo(talentrow);
+
+		// The last column contains actions that can be performed with the
+		// specialization. Currently it only has a remove button.
+		var actionTd = $("<td>").appendTo(talentrow);
+		// The remove button calls character.removeSpec and then calc
+		$("<button>").html("Remove")
+			.addClass("btn btn-default pull-right")
+			.click(function() {
+				character.removeTalent(character.talents_taken[i]);
+				calc();
+			})
+			.appendTo(actionTd);
+
+		talentrow.appendTo($("#talent_table"));
+	}
+}
+
+// This function is stupid but I didn't want to rewrite all the code for
+// attributes after I realized I haven't specified the long names anywhere.
+// Didn't think I would need them, but guess what?
+function getAttributeName(shortname) {
+	// We literally just map short names to long names. It's nothing fancy.
+	var attr = {"str":"Strength","ins":"Instinct","agi":"Agility","for":"Fortitude","int":"Intelligence","wil":"Willpower"};
+	return attr[shortname];
+}
+
+function getTalentRequirementsString(requirements) {
+	var reqs = [];
+	for (var i in requirements["skills"]) {
+		reqs.push(i+" "+requirements["skills"][i]);
+	}
+	for (var i in requirements["talent"]) {
+		reqs.push(requirements["talent"][i]);
+	}
+	for (var i in requirements["attributes"]) {
+		reqs.push(getAttributeName(i)+" "+requirements["attributes"][i])
+	}
+	return reqs.join(", ");
 }

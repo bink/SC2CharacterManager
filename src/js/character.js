@@ -84,3 +84,20 @@ character.removeSpec = function(specid) {
 		this.specs_taken.splice(index, 1);
 	}
 }
+
+character.addTalent = function(talentid) {
+	if(!this.talents_taken) {
+		this.talents_taken = [];
+	}
+
+	if(!(talentid in this.talents_taken)) {
+		this.talents_taken.push(talentid);
+	}
+}
+
+character.removeTalent = function(talentid) {
+	if(talentid in this.talents_taken) {
+		var index = this.talents_taken.indexOf(talentid);
+		this.talents_taken.splice(index, 1);
+	}
+}
