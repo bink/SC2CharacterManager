@@ -77,3 +77,10 @@ character.addSpec = function(specid) {
 		this.specs_taken.push(specid);
 	}
 }
+
+character.removeSpec = function(specid) {
+	if(specid in this.specs_taken) {
+		var index = this.specs_taken.indexOf(specid);
+		this.specs_taken.splice(index, 1);
+	}
+}

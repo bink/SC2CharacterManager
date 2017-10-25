@@ -257,13 +257,26 @@ function fromCharacter() {
 
 	// Add specs to spec table
 	for(var i in character.specs_taken) {
-		console.log(i);
-		var spec = specializations[i];
+		var spec = specializations[character.specs_taken[i]];
 		var specrow = $("<tr>").addClass("specialization");
+		// Add a name column
 		$("<td>").html(spec["name"])
 			.appendTo(specrow);
+		// ...and a description column.
 		$("<td>").html(spec["description"])
 			.appendTo(specrow);
+
+		// The last column contains actions that can be performed with the
+		// specialization. Currently it only has a remove button.
+		var actionTd = $("<td>").appendTo(specrow);
+		// The remove button calls character.removeSpec and then calc
+		$("<button>").html("Remove")
+			.addClass("btn btn-default pull-right")
+			.click(function() {
+				character.removeSpec(character.specs_taken[i]);
+				calc();
+			})
+			.appendTo(actionTd);
 
 		specrow.appendTo($("#spec_table"));
 	}
