@@ -26,6 +26,16 @@ character.calc = function() {
 	this.atr_int = atr_races_bonus.int + atr_backg_bonus.int + parseInt(this.atr_int_bonus);
 	this.atr_wil = atr_races_bonus.wil + atr_backg_bonus.wil + parseInt(this.atr_wil_bonus);
 
+	for(var i in this.specs_taken) {
+		var spec = specializations[i];
+		this.atr_str += parseInt(spec.basestats.str);
+		this.atr_ins += parseInt(spec.basestats.ins);
+		this.atr_agi += parseInt(spec.basestats.agi);
+		this.atr_for += parseInt(spec.basestats.for);
+		this.atr_int += parseInt(spec.basestats.int);
+		this.atr_wil += parseInt(spec.basestats.wil);
+	}
+
 	this.points_spent = parseInt(this.atr_str_bonus)*3 + parseInt(this.atr_ins_bonus)*3 + parseInt(this.atr_agi_bonus)*3 + parseInt(this.atr_for_bonus)*3 + parseInt(this.atr_int_bonus)*3 + parseInt(this.atr_wil_bonus)*3 + races[this.race].cpcost + backgrounds[this.background].cpcost;
 
 	this.points_total = 25;

@@ -168,8 +168,7 @@ function setupFields() {
 		// Add it to the character
 		character.addSpec(spec);
 
-		// debug this shit
-		console.log(character);
+		calc();
 	});
 }
 
@@ -237,6 +236,7 @@ function toCharacter() {
 		var field_id = $(this).attr("id").substring(2);
 		character[field_id] = $(this).val();
 	});
+
 }
 
 function fromCharacter() {
@@ -251,4 +251,18 @@ function fromCharacter() {
 	// Fill the cp spent/cp total fields as well.
 	$("#cp_spent").html(character.points_spent);
 	$("#cp_total").html(character.points_total);
+	
+	// Clear the table completely
+	$("tr.specialization").remove();
+
+	// Add specs to spec table
+	for(var i in character.specs_taken) {
+		console.log(i);
+		var spec = specializations[i];
+		var specrow = $("<tr>").addClass("specialization");
+		$("<td>").html(spec["name"])
+			.appendTo(specrow);
+
+		specrow.appendTo($("#spec_table"));
+	}
 }
