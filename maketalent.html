@@ -1,0 +1,125 @@
+<html>
+<head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="src/css/editor.css" rel="stylesheet" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+	<!-- Main container -->
+	<div class="container">
+		<div class="form" id="spec_form">
+			<div class="form-group">
+				<label for="name">
+					Name
+				</label>
+				<input type="text" class="form-control" id="name">
+			</div>
+			<div class="form-group">
+				<label for="skill_requirements">
+					Skill requirements
+				</label>
+				<input type="text" class="form-control" id="skill_requirements" placeholder="Leadership 5;Defensive Training 7">
+			</div>
+			<div class="form-group">
+				<label for="talent_requirements">
+					Talent requirements
+				</label>
+				<input type="text" class="form-control" id="talent_requirements" placeholder="Air of Authority;Intimidating Presence">
+			</div>
+			<div class="row">
+				<div class="form-group col-xs-2">
+					<label for="str_req">
+						Strength Requirement
+					</label>
+					<input type="text" class="form-control" id="str_req" value="0">
+				</div>
+				<div class="form-group col-xs-2">
+					<label for="ins_req">
+						Instinct Requirement
+					</label>
+					<input type="text" class="form-control" id="ins_req" value="0">
+				</div>
+				<div class="form-group col-xs-2">
+					<label for="agi_req">
+						Agility Requirement
+					</label>
+					<input type="text" class="form-control" id="agi_req" value="0">
+				</div>
+				<div class="form-group col-xs-2">
+					<label for="for_req">
+						Fortitude Requirement
+					</label>
+					<input type="text" class="form-control" id="for_req" value="0">
+				</div>
+				<div class="form-group col-xs-2">
+					<label for="int_req">
+						Intelligence Requirement
+					</label>
+					<input type="text" class="form-control" id="int_req" value="0">
+				</div>
+				<div class="form-group col-xs-2">
+					<label for="wil_req">
+						Willpower Requirement
+					</label>
+					<input type="text" class="form-control" id="wil_req" value="0">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="bonus">
+					Bonus description
+				</label>
+				<textarea class="form-control" id="bonus"></textarea>
+			</div>
+		</div>
+		<label>Result</label><br/>
+		<textarea id="result" cols="80" rows="20"></textarea>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+	function gen() {
+		var spec = {};
+		spec["name"] = $("#name").val();
+
+		spec["requirements"] = {};
+		// Skill requirements
+		spec["requirements"]["skills"] = {}
+		var skillreqs = $("#skill_requirements").val().split(";");
+		for(var s in skillreqs) {
+			var skill = skillreqs[s].split(" ");
+			var level = skill.pop();
+			skill = skill.join(" ");
+			spec["requirements"]["skills"][skill] = level;
+		}
+		// Talent requirements
+		var talentreqs = $("#talent_requirements").val().split(";");
+		spec["requirements"]["talents"] = talentreqs;
+		// Attribute requirements
+		var attrreqs = {};
+		attrreqs["str"] = parseInt($("#str_req").val());
+		attrreqs["ins"] = parseInt($("#ins_req").val());
+		attrreqs["agi"] = parseInt($("#agi_req").val());
+		attrreqs["for"] = parseInt($("#for_req").val());
+		attrreqs["int"] = parseInt($("#int_req").val());
+		attrreqs["wil"] = parseInt($("#wil_req").val());
+
+		spec["requirements"]["attributes"] = attrreqs;
+		
+		/*spec["basestats"]["str"] = parseInt($("#str_bonus").val());
+		spec["basestats"]["ins"] = parseInt($("#ins_bonus").val());
+		spec["basestats"]["agi"] = parseInt($("#agi_bonus").val());
+		spec["basestats"]["for"] = parseInt($("#for_bonus").val());
+		spec["basestats"]["int"] = parseInt($("#int_bonus").val());
+		spec["basestats"]["wil"] = parseInt($("#wil_bonus").val());*/
+
+		spec["bonus"] = $("#bonus").val();
+
+		result = JSON.stringify(spec);
+		$("#result").html(result);
+	}
+	$("#spec_form input, #spec_form textarea").change(gen);
+	gen();
+	</script>
+</body>
+</html>
