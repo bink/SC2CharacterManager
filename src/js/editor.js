@@ -347,12 +347,14 @@ function getAttributeName(shortname) {
 function getTalentRequirementsString(requirements) {
 	var reqs = [];
 	for (var i in requirements["skills"]) {
+		if (i == "") continue;
 		reqs.push(i+" "+requirements["skills"][i]);
 	}
 	for (var i in requirements["talent"]) {
 		reqs.push(requirements["talent"][i]);
 	}
 	for (var i in requirements["attributes"]) {
+		if (requirements["attributes"][i] == "0") continue;
 		reqs.push(getAttributeName(i)+" "+requirements["attributes"][i])
 	}
 	return reqs.join(", ");
